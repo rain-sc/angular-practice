@@ -7,11 +7,6 @@ import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  form: FormGroup = new FormGroup({
-    username: new FormControl(''),
-    password: new FormControl(''),
-  });
-
   constructor() { }
 
   ngOnInit() {
@@ -21,10 +16,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   }
 
-  submit() {
-    if (this.form.valid) {
-      console.log(this.form.value);
-
-    }
+  onLogin() {
+  
   }
 }
