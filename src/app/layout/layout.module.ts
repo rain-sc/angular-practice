@@ -6,11 +6,13 @@ import { FormsModule } from "@angular/forms";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 
 @NgModule({
+  declarations: [
+    DashboardComponent,
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild(LayoutRoutes),
-    FormsModule
+    FormsModule,
   ],
-  declarations: [DashboardComponent]
 })
 export class LayoutModule { }
