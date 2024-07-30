@@ -1,4 +1,7 @@
 <div>
+  <div class="btn-area">
+    <button mat-raised-button (click)="openDialog('add')">{{dialogTitle.add}}</button>
+  </div>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>

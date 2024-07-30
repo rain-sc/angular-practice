@@ -13,4 +13,5 @@ export class ProductApiService {
   getProductListAPI(): Observable<ProductListType[]> {
     return this.http.get<ProductListType[]>(this.prifixedUrl)
   }
+
 }

@@ -13,6 +13,7 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 const modules = [
@@ -28,7 +29,8 @@ const modules = [
   MatOptionModule,
   MatListModule,
   MatSidenavModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatDialogModule
 ];
 
 @NgModule({
