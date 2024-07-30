@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { LoginApiService } from '../services/login-api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,12 +9,12 @@ import { LoginApiService } from '../services/login-api.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  constructor(private LoginApiService: LoginApiService) { }
+  constructor(private LoginApiService: LoginApiService, private route: Router) { }
   form!: FormGroup;
   ngOnInit() {
     this.form = new FormGroup({
-      username: new FormControl('mor_2314',[Validators.required]),
-      password: new FormControl('83r5^_',[Validators.required])
+      username: new FormControl('mor_2314', [Validators.required]),
+      password: new FormControl('83r5^_', [Validators.required])
     })
   }
   ngOnDestroy() {
@@ -21,8 +22,12 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   login() {
-    if( this.form.valid){
-      this.LoginApiService.loginAPI(this.form.value).subscribe()
+    if (this.form.valid) {
+      this.LoginApiService.loginAPI(this.form.value).subscribe({
+        next: (res) => {
+          this.route.navigateByUrl('/dashboard')
+        }
+      })
     }
   }
 }
