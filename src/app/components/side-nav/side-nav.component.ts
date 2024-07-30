@@ -11,7 +11,6 @@ export class SideNavComponent implements OnInit {
   routes = childRoutes
 
   ngOnInit(): void {
-    console.log("routes", this.routes);
   }
 
 }
