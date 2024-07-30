@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { childRoutes } from './child-routes';
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
@@ -7,4 +7,5 @@ import { Component } from '@angular/core';
 })
 export class LayoutComponent {
   toolBarHeight = 64;
+  routes = childRoutes
 }

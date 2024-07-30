@@ -1,16 +1,45 @@
-<div class="layout-container">
-  <header>
-    <app-top-nav></app-top-nav>
-  </header>
-  <mat-sidenav-container class="sidenav-container" [style.marginTop.px]="toolBarHeight">
-    <mat-sidenav #snav class="sidenav mat-elevation-z10" mode="side" opened>
-      <app-side-nav></app-side-nav>
-    </mat-sidenav>
-    <mat-sidenav-content>
-      <main class="main-container">
-        <router-outlet></router-outlet>
-      </main>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
-  <footer>footer</footer>
+ 
+   <c-sidebar
+  #sidebar1="cSidebar"
+  class="d-print-none sidebar sidebar-fixed border-end"
+  colorScheme="dark"
+  id="sidebar1"
+  visible
+>
+  <c-sidebar-header class="border-bottom">
+    <c-sidebar-brand>
+        Angular
+    </c-sidebar-brand>
+  </c-sidebar-header>
+    <c-sidebar-nav  [navItems]="routes" dropdownMode="close" />
+</c-sidebar> 
+  
+<!--main-->
+<div class="wrapper d-flex flex-column min-vh-100">
+
+  <ng-container>
+    <c-container [fluid]="true" class="border-bottom px-4">
+      <svg cIcon name="cilMenu" size="lg"></svg>
+      <svg cIcon class="me-2" name="cilBell"></svg>
+      <button
+        cSidebarToggle="sidebar1"
+        cHeaderToggler
+        class="btn"
+        toggle="visible"
+        style="margin-inline-start: -14px;"
+        aria-label="Toggle sidebar navigation"
+      >
+        <svg cIcon name="cilMenu" size="lg"></svg>
+      </button>  
+    </c-container>
+    <c-container [fluid]="true" class="px-4">
+      <c-breadcrumb-router />
+    </c-container>
+  </ng-container>
+
+  <div class="body flex-grow-1">
+    <c-container breakpoint="lg" class="h-auto px-4">
+      <router-outlet />
+    </c-container>
+  </div>
 </div>

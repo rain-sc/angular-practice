@@ -19,7 +19,13 @@ import {
   RowComponent,
   TextColorDirective,
   CardGroupComponent,
-  InputGroupComponent
+  InputGroupComponent,
+  SidebarComponent,
+  SidebarHeaderComponent,
+  SidebarModule, 
+  HeaderNavComponent,
+  NavItemComponent,
+  BreadcrumbRouterComponent
  } from '@coreui/angular';
 
 const modules = [
@@ -41,7 +47,13 @@ const modules = [
   TextColorDirective,
   ContainerComponent,
   CardGroupComponent,
-  InputGroupComponent
+  InputGroupComponent,
+  SidebarComponent,
+  SidebarHeaderComponent,
+  SidebarModule ,
+  HeaderNavComponent,
+  NavItemComponent,
+  BreadcrumbRouterComponent
 ]
 
 @NgModule({
