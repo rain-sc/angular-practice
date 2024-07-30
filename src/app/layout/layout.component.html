@@ -2,8 +2,11 @@
   <header>
     <app-top-nav></app-top-nav>
   </header>
-  <main>
+  <mat-sidenav-container class="sidenav-container" [style.marginTop.px]="toolBarHeight">
+    <mat-sidenav #snav class="sidenav mat-elevation-z10">
+      <app-side-nav></app-side-nav>
+    </mat-sidenav>
     <router-outlet></router-outlet>
-  </main>
+  </mat-sidenav-container>
   <footer>footer</footer>
 </div>

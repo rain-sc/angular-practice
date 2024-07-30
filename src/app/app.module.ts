@@ -11,13 +11,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { LayoutComponent } from './layout/layout.component';
 import { TopNavComponent } from './components/top-nav/top-nav.component';
 import { MaterialModule } from './material.module';
+import { SideNavComponent } from './components/side-nav/side-nav.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LayoutComponent,
-    TopNavComponent
+    // LayoutComponent,
+    // TopNavComponent,
+    // SideNavComponent
   ],
   imports: [
     BrowserModule,

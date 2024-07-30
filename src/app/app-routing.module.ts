@@ -10,18 +10,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/dashboard',
-    pathMatch: 'full'
-  },
-  {
-    path: '',
-    component: LayoutComponent,
-    children: [
-      {
-        path: '',
-        loadChildren: () => import('./layout/layout.module').then((m) => m.LayoutModule)
-      }
-    ],
+    loadChildren: () => import('./layout/layout.module').then((m) => m.LayoutModule),
     canActivate: [AuthGuard],
   },
 
