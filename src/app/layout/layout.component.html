@@ -3,10 +3,14 @@
     <app-top-nav></app-top-nav>
   </header>
   <mat-sidenav-container class="sidenav-container" [style.marginTop.px]="toolBarHeight">
-    <mat-sidenav #snav class="sidenav mat-elevation-z10">
+    <mat-sidenav #snav class="sidenav mat-elevation-z10" mode="side" opened>
       <app-side-nav></app-side-nav>
     </mat-sidenav>
-    <router-outlet></router-outlet>
+    <mat-sidenav-content>
+      <main class="main-container">
+        <router-outlet></router-outlet>
+      </main>
+    </mat-sidenav-content>
   </mat-sidenav-container>
   <footer>footer</footer>
 </div>

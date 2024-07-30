@@ -1,7 +1,4 @@
 import { Component } from '@angular/core';
-import { MediaChange, MediaObserver } from '@angular/flex-layout';
-import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-layout',
@@ -10,5 +7,4 @@ import { Subscription } from 'rxjs';
 })
 export class LayoutComponent {
   toolBarHeight = 64;
-
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { childRoutes } from 'src/app/layout/child-routes';
 
 @Component({
@@ -6,7 +6,12 @@ import { childRoutes } from 'src/app/layout/child-routes';
   templateUrl: './side-nav.component.html',
   styleUrls: ['./side-nav.component.scss']
 })
-export class SideNavComponent {
+export class SideNavComponent implements OnInit {
   showMenu = false
   routes = childRoutes
+
+  ngOnInit(): void {
+    console.log("routes", this.routes);
+  }
+
 }
