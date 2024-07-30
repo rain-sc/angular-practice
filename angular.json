@@ -72,10 +72,15 @@
               "browserTarget": "angular-practice:build:production"
             },
             "development": {
-              "browserTarget": "angular-practice:build:development"
+              "browserTarget": "angular-practice:build:development",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development",
+          "options": {
+            "browserTarget": "angular-practice:build:development",
+            "proxyConfig": "src/proxy.conf.json"
+          }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
