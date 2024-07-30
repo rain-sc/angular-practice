@@ -8,13 +8,13 @@ import { map } from 'rxjs';
 })
 export class LoginApiService {
 
-  constructor(private http :HttpClient, ) { }
+  constructor(private http: HttpClient) { }
 
-  loginAPI(data:LoginType){
-    return this.http.post<ResToken>('/api/auth/login',data).pipe(
-      map((res)=>{
-        if(res.token){
-          localStorage.setItem('ngToken',res.token)
+  loginAPI(data: LoginType) {
+    return this.http.post<ResToken>('/api/auth/login', data).pipe(
+      map((res) => {
+        if (res.token) {
+          localStorage.setItem('ngToken', res.token)
         }
         return res
       })

@@ -8,11 +8,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
- 
+import { LayoutComponent } from './layout/layout.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
+    LayoutComponent
   ],
   imports: [
     BrowserModule,
