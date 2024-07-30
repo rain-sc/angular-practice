@@ -3,7 +3,6 @@ import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { LayoutRoutes } from "./layout-routing.module";
 import { FormsModule } from "@angular/forms";
-import { DashboardComponent } from "./dashboard/dashboard.component";
 import { LayoutComponent } from "./layout.component";
 import { TopNavComponent } from "../components/top-nav/top-nav.component";
 import { SideNavComponent } from "../components/side-nav/side-nav.component";
