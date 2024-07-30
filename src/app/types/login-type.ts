@@ -3,6 +3,9 @@ export interface LoginType   {
   password:string
 }
 
-export interface ResToken {
+export interface UserInfoType {
+  avatar:null
   token:string
+  id:number
+  username:string
 }

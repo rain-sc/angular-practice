@@ -25,5 +25,18 @@ export class DialogComponent {
 
   onSubmit() {
     console.log("form", this.form);
+    fetch('http://ajax-api.itheima.net/api/books', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "id": 100,
+    "bookname": "rain",
+    "author": "rain",
+    "publisher": "rain"
+      })
+    
+    })
   }
 }

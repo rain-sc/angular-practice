@@ -1,6 +1,6 @@
 {
   "/api":{
-    "target": "https://fakestoreapi.com/",
+    "target": "http://ajax-api.itheima.net/",
     "secure": false,
     "pathRewrite": {
       "^/api": ""
