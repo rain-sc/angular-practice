@@ -4,7 +4,7 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LoginRoutingModule } from './login-routing.module';
-import { MaterialModule } from '../material.module';
+import { CoreuiModule } from '../coreui.module';
 
 @NgModule({
   declarations: [LoginComponent],
@@ -13,8 +13,8 @@ import { MaterialModule } from '../material.module';
     FormsModule,
     FlexLayoutModule,
     LoginRoutingModule,
-    MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CoreuiModule
   ]
 })
 
