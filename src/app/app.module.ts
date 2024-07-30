@@ -10,16 +10,11 @@ import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { LayoutComponent } from './layout/layout.component';
 import { TopNavComponent } from './components/top-nav/top-nav.component';
-import { MaterialModule } from './material.module';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
-
 
 @NgModule({
   declarations: [
     AppComponent,
-    // LayoutComponent,
-    // TopNavComponent,
-    // SideNavComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +24,6 @@ import { SideNavComponent } from './components/side-nav/side-nav.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MaterialModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   providers: [],

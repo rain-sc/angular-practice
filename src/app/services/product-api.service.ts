@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ProductListType } from '../types/product-type';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class ProductApiService {
@@ -9,7 +10,7 @@ export class ProductApiService {
 
   prifixedUrl = '/api/products'
 
-  getProductListAPI() {
-    return this.http.get<ProductListType>(this.prifixedUrl)
+  getProductListAPI(): Observable<ProductListType[]> {
+    return this.http.get<ProductListType[]>(this.prifixedUrl)
   }
 }
