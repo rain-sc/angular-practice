@@ -60,6 +60,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         studentInfo:rowData,
       },
       width:'450px',
+    }).afterClosed().subscribe(res=>{
+      this.getStudentList()
     })
     }
   editDialog(rowData:StudentType,actionType: keyof DialogTitleType){
