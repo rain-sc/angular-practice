@@ -8,11 +8,12 @@ import { DialogComponent } from 'src/app/components/dialog/dialog.component';
 
 export interface DialogTitleType {
   add: string,
-  edit: string
+  edit: string,
+  delete:string
 }
 export interface DialogType {
   actionType: keyof DialogTitleType
-
+  studentInfo: StudentType
 }
 
 @Component({
@@ -29,8 +30,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   studentList!: StudentType
   loadingIndicator = true;
   dialogTitle: DialogTitleType = {
-    add: 'Add Product',
-    edit: 'Edit Product'
+    add: 'Add',
+    edit: 'Edit',
+    delete:'Delete'
   }
   ngOnInit() {
     this.getStudentList()
@@ -51,17 +53,20 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       }
     )
   }
-  editDialog(row:any){
-    console.log("blockAgents",row);
+  openDialog(actionType: keyof DialogTitleType,rowData:StudentType) {
     this.dialog.open(DialogComponent,{
       data:{
-        actionType:'edit'
-      }
+        actionType:`${this.dialogTitle[actionType]} Student [${rowData.name}]`,
+        studentInfo:rowData
+      },
+      width:'450px',
     })
-    
-  }
-  deteleDialog(row:any){
-    console.log("blockAgents",row.id);
+    }
+  editDialog(rowData:StudentType,actionType: keyof DialogTitleType){
+    this.openDialog(actionType,rowData)
 
+  }
+  deteleDialog(row:StudentType,actionType: keyof DialogTitleType){
+    console.log("blockAgents",row.id);
   }
 }

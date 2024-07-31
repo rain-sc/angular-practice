@@ -18,11 +18,11 @@ class="bootstrap striped"
 <ngx-datatable-column name="Group" prop="group"></ngx-datatable-column>
 <ngx-datatable-column name="Actions"  prop="id">
   <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-    <span  (click)="editDialog(row)" >
+    <span  (click)="editDialog(row,'edit')" >
       <svg cIcon class="me-2" name="cil-pencil" ></svg>
     </span>
     <span class="mx-1"></span>
-    <span  (click)="deteleDialog(row)" >
+    <span  (click)="deteleDialog(row,'delete')" >
       <svg cIcon class="me-2" name="cilTrash" ></svg>
     </span>
   </ng-template>

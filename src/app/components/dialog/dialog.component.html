@@ -1,8 +1,27 @@
-<div fxLayout="column" fxLayoutAlign="space-between start" fxFill>
+<div>
   <h2 mat-dialog-title>{{data.actionType}}</h2>
-  <mat-dialog-content [formGroup]="form">
+  <mat-dialog-content style="display:flex;flex-direction: column;" [formGroup]="form">
+
     <mat-form-field>
-      <input matInput placeholder="Title" type="text" formControlName="title">
+      <input matInput placeholder="Name" formControlName="name">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="gender" formControlName="gender">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="gender" formControlName="area">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="gender" formControlName="city">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="gender" formControlName="hopeSalary">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="gender" formControlName="salary">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="gender" formControlName="group">
     </mat-form-field>
   </mat-dialog-content>
   <mat-dialog-actions align="end">
