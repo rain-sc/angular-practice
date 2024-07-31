@@ -1,30 +1,35 @@
+import { CommonModule } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DialogType } from 'src/app/layout/dashboard/dashboard.component';
 import { MaterialModule } from 'src/app/material.module';
+import { GenderPipe } from 'src/app/pipe/gender.pipe';
 
 @Component({
   selector: 'app-dialog',
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.scss'],
-  imports: [MaterialModule, FormsModule, ReactiveFormsModule],
+  imports: [MaterialModule, FormsModule, ReactiveFormsModule,CommonModule,GenderPipe],
   standalone: true,
   providers: []
 })
 export class DialogComponent implements OnInit {
+ 
   constructor(
     public dialogRef: MatDialogRef<DialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogType,
   ) {
   }
+  genderControl = new FormControl(this.data.studentInfo.gender,[
+    Validators.required
+  ])
+  genderList:number[]=[0,1]
   form: FormGroup = new FormGroup<any>({
     name: new FormControl(this.data.studentInfo.name,[
       Validators.required
     ]),
-    gender: new FormControl(this.data.studentInfo.gender,[
-      Validators.required
-    ]),
+    gender: this.genderControl,
     area: new FormControl(this.data.studentInfo.area,[
       Validators.required
     ]),
@@ -44,6 +49,7 @@ export class DialogComponent implements OnInit {
       Validators.required
     ]),
   })
+ 
 ngOnInit() {
 }
   onSubmit() {

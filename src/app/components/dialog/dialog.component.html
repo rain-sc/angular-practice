@@ -1,27 +1,30 @@
 <div>
   <h2 mat-dialog-title>{{data.actionType}}</h2>
   <mat-dialog-content style="display:flex;flex-direction: column;" [formGroup]="form">
-
     <mat-form-field>
       <input matInput placeholder="Name" formControlName="name">
     </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="gender" formControlName="gender">
+    <mat-form-field >
+      <mat-select [formControl]="genderControl" name="gender" placeholder="Gender">
+        <mat-option *ngFor="let gender of genderList" [value]="gender">
+          {{gender | transformGender}}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="gender" formControlName="area">
+      <input matInput placeholder="area" formControlName="area">
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="gender" formControlName="city">
+      <input matInput placeholder="city" formControlName="city">
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="gender" formControlName="hopeSalary">
+      <input matInput placeholder="hopeSalary" formControlName="hopeSalary">
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="gender" formControlName="salary">
+      <input matInput placeholder="salary" formControlName="salary">
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="gender" formControlName="group">
+      <input matInput placeholder="group" formControlName="group">
     </mat-form-field>
   </mat-dialog-content>
   <mat-dialog-actions align="end">
