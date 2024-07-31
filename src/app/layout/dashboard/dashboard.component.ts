@@ -5,6 +5,7 @@ import { StudentType } from 'src/app/types/student-type';
 import { IconModule } from '@coreui/icons-angular';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from 'src/app/components/dialog/dialog.component';
+import { GenderPipe } from 'src/app/pipe/gender.pipe';
 
 export interface DialogTitleType {
   add: string,
@@ -21,7 +22,7 @@ export interface DialogType {
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
   providers: [],
-  imports: [NgxDatatableModule,IconModule],
+  imports: [NgxDatatableModule,IconModule,GenderPipe],
   standalone: true
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
