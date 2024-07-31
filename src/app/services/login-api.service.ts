@@ -18,10 +18,10 @@ export class LoginApiService {
   loginAPI(data: LoginType) {
     return this.http.post<ResType<UserInfoType>>('/api/login', data).pipe(
       map((res) => {
-        const {token} = res.data
+        const {token,username} = res.data
         if (token) {
           localStorage.setItem('ngToken', token)
-          this.store.dispatch(addUserInfo({userInfo:res.data}))
+          localStorage.setItem('ngUsername', username)
           this.router.navigate(['/dashboard'])
         }
         return res
