@@ -3,6 +3,10 @@ import { FormGroup, FormControl,  Validators, FormBuilder } from '@angular/forms
 import { LoginApiService } from '../services/login-api.service';
 import { Router } from '@angular/router';
 import { ValidationFormsService } from '../services/validation-forms.service';
+import { select, Store } from '@ngrx/store';
+import { AppState } from '../store';
+import { selectUserInfo } from '../store/selectors/user.selectors';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,12 +18,11 @@ export class LoginComponent implements OnInit, OnDestroy {
   submitted  =false
   formErrors:any
   formControls!: string[];
-
   constructor(
     private LoginApiService: LoginApiService, 
-    private route: Router,
+    private router: Router,
     private formBuilder:FormBuilder,
-    private validationFormsService:ValidationFormsService
+    private validationFormsService:ValidationFormsService,
   ) {
     this.formErrors = this.validationFormsService.errorMessages;
     this.createForm();
@@ -55,9 +58,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
   onSubmit(){
     if(this.onLoginValidate()){
-      this.LoginApiService.loginAPI(this.loginForm.value).subscribe((res)=>{
-        this.route.navigate(['/dashboard'])
-      })
+      this.LoginApiService.loginAPI(this.loginForm.value).subscribe()
     }
   }
 }

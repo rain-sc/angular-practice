@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store';
+import { addUserInfo } from 'src/app/store/actions/user.actions';
 
 @Component({
   selector: 'app-default-header',
@@ -7,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./default-header.component.scss']
 })
 export class DefaultHeaderComponent {
-  constructor(private router:Router){
+  constructor(private router:Router,private store:Store<AppState>){
 
   }
   logout(){
