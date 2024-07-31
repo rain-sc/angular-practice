@@ -2,19 +2,19 @@ import { AfterViewInit, Component, OnInit, } from '@angular/core';
 import { StudentApiService } from 'src/app/services/student-api.service';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { StudentType } from 'src/app/types/student-type';
+import { IconModule } from '@coreui/icons-angular';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
   providers: [],
-  imports: [NgxDatatableModule],
+  imports: [NgxDatatableModule,IconModule],
   standalone: true
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
 
   constructor(private studentService: StudentApiService) { }
-  columns = [{ prop: 'name' }, { name: 'Gender' }, { name: 'Age' }, { name: 'City' }, { name: 'Province' }, { prop: 'hope_salary' }, { name: 'salary' }, { name: 'group' }];
   studentList!: StudentType
   loadingIndicator = true;
   ngOnInit() {
@@ -35,5 +35,13 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         console.log('completed');
       }
     )
+  }
+  editDialog(row:any){
+    console.log("blockAgents",row);
+    
+  }
+  deteleDialog(row:any){
+    console.log("blockAgents",row.id);
+
   }
 }
