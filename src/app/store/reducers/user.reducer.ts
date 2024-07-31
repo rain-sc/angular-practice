@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { UserInfoType } from 'src/app/types/login-type';
-import { addUserInfo,   } from '../actions/user.actions';
+import { addUserInfo, deleteUserInfo,   } from '../actions/user.actions';
 
 export const userFeatureKey = 'user';
 
@@ -23,5 +23,6 @@ export const reducer = createReducer(
     ...state,
     userInfo
   })),
+  on(deleteUserInfo, (state) => initialState)
 );
 

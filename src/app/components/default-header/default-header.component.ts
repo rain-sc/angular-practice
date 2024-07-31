@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store';
-import { addUserInfo } from 'src/app/store/actions/user.actions';
+import { addUserInfo, deleteUserInfo } from 'src/app/store/actions/user.actions';
 
 @Component({
   selector: 'app-default-header',
@@ -16,5 +16,6 @@ export class DefaultHeaderComponent {
   logout(){
     localStorage.removeItem('ngToken')
     this.router.navigate(['/login'])
+    this.store.dispatch(deleteUserInfo())
   }
 }
