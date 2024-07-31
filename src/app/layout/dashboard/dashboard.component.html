@@ -1,2 +1,12 @@
-<ngx-datatable [rows]="studentList" [columns]="columns" [loadingIndicator]="loadingIndicator">
+<ngx-datatable 
+class="bootstrap striped"
+[limit]="10"
+[rows]="studentList"
+[columns]="columns"
+[loadingIndicator]="loadingIndicator"
+[columnMode]="'force'"
+[headerHeight]="50"
+[footerHeight]="50"
+[rowHeight]="'auto'"
+>
 </ngx-datatable>
