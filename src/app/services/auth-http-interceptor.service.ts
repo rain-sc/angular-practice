@@ -11,7 +11,7 @@ export class AuthHttpInterceptorService {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = localStorage.getItem('ngToken')!;
     const newReq = req.clone({
-      headers: req.headers.set('Authorization', token),
+      setHeaders: { Authorization: `${token}` }
     });
     const started = Date.now();
     return next.handle(newReq).pipe(
