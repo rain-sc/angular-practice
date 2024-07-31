@@ -3,6 +3,17 @@ import { StudentApiService } from 'src/app/services/student-api.service';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { StudentType } from 'src/app/types/student-type';
 import { IconModule } from '@coreui/icons-angular';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from 'src/app/components/dialog/dialog.component';
+
+export interface DialogTitleType {
+  add: string,
+  edit: string
+}
+export interface DialogType {
+  actionType: keyof DialogTitleType
+
+}
 
 @Component({
   selector: 'app-dashboard',
@@ -14,9 +25,13 @@ import { IconModule } from '@coreui/icons-angular';
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
 
-  constructor(private studentService: StudentApiService) { }
+  constructor(private studentService: StudentApiService,private dialog:MatDialog) { }
   studentList!: StudentType
   loadingIndicator = true;
+  dialogTitle: DialogTitleType = {
+    add: 'Add Product',
+    edit: 'Edit Product'
+  }
   ngOnInit() {
     this.getStudentList()
   }
@@ -38,6 +53,11 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
   editDialog(row:any){
     console.log("blockAgents",row);
+    this.dialog.open(DialogComponent,{
+      data:{
+        actionType:'edit'
+      }
+    })
     
   }
   deteleDialog(row:any){

@@ -7,6 +7,7 @@ import { LayoutComponent } from "./layout.component";
 import { CoreuiModule } from "../coreui.module";
 import { IconModule } from "@coreui/icons-angular";
 import { DefaultHeaderComponent } from "../components/default-header/default-header.component";
+import { MaterialModule } from "../material.module";
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { DefaultHeaderComponent } from "../components/default-header/default-hea
     RouterModule.forChild(LayoutRoutes),
     FormsModule,
     CoreuiModule,
-    IconModule
+    IconModule,
+    MaterialModule
   ],
 })
 export class LayoutModule { }
