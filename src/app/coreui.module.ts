@@ -25,7 +25,8 @@ import {
   SidebarModule, 
   HeaderNavComponent,
   NavItemComponent,
-  BreadcrumbRouterComponent
+  BreadcrumbRouterComponent,
+ 
  } from '@coreui/angular';
 
 const modules = [
@@ -53,7 +54,8 @@ const modules = [
   SidebarModule ,
   HeaderNavComponent,
   NavItemComponent,
-  BreadcrumbRouterComponent
+  BreadcrumbRouterComponent,
+   
 ]
 
 @NgModule({
