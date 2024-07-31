@@ -1,58 +1,105 @@
 import { CommonModule } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DialogType } from 'src/app/layout/dashboard/dashboard.component';
 import { MaterialModule } from 'src/app/material.module';
 import { GenderPipe } from 'src/app/pipe/gender.pipe';
+import { StudentApiService } from 'src/app/services/student-api.service';
 
 @Component({
   selector: 'app-dialog',
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.scss'],
-  imports: [MaterialModule, FormsModule, ReactiveFormsModule,CommonModule,GenderPipe],
+  imports: [MaterialModule, FormsModule, ReactiveFormsModule, CommonModule, GenderPipe],
   standalone: true,
   providers: []
 })
 export class DialogComponent implements OnInit {
- 
   constructor(
     public dialogRef: MatDialogRef<DialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogType,
+    private studentService: StudentApiService,
   ) {
   }
-  genderControl = new FormControl(this.data.studentInfo.gender,[
+  genderControl = new FormControl(this.data.studentInfo.gender, [
     Validators.required
   ])
-  genderList:number[]=[0,1]
+  genderList: number[] = [0, 1]
   form: FormGroup = new FormGroup<any>({
-    name: new FormControl(this.data.studentInfo.name,[
+    id: new FormControl(this.data.studentInfo.id),
+    name: new FormControl(this.data.studentInfo.name, [
       Validators.required
     ]),
     gender: this.genderControl,
-    area: new FormControl(this.data.studentInfo.area,[
+    age: new FormControl(this.data.studentInfo.age, [
       Validators.required
     ]),
-    city: new FormControl(this.data.studentInfo.city,[
+    area: new FormControl(this.data.studentInfo.area, [
       Validators.required
     ]),
-    province: new FormControl(this.data.studentInfo.province,[
+    city: new FormControl(this.data.studentInfo.city, [
       Validators.required
     ]),
-    hopeSalary: new FormControl(this.data.studentInfo.hope_salary,[
+    province: new FormControl(this.data.studentInfo.province, [
       Validators.required
     ]),
-    salary: new FormControl(this.data.studentInfo.salary,[
+    hope_salary: new FormControl(this.data.studentInfo.hope_salary, [
       Validators.required
     ]),
-    group: new FormControl(this.data.studentInfo.group,[
+    salary: new FormControl(this.data.studentInfo.salary, [
+      Validators.required
+    ]),
+    group: new FormControl(this.data.studentInfo.group, [
       Validators.required
     ]),
   })
- 
-ngOnInit() {
-}
+  submitted = false
+  ngOnInit() {
+  }
+  closeDialog() {
+    this.dialogRef.close();
+  }
+  onLoginValidate() {
+    this.submitted = true;
+    return this.form.status === 'VALID';
+  }
+  resetForm() {
+    this.data.actionType = ''
+    this.data.studentInfo = {
+      age: 0,
+      area: '',
+      city: '',
+      createdAt: '',
+      gender: 0,
+      group: 0,
+      hope_salary: 0,
+      id: 0,
+      name: '',
+      province: '',
+      salary: 0,
+      updatedAt: '',
+      user_id: 0,
+    }
+    this.form.reset('')
+    this.form.clearValidators()
+    console.log("this.data.actionType", this.data);
+  }
   onSubmit() {
-    console.log("form", this.form);
+    if (this.onLoginValidate()) {
+      this.studentService.updateStudentAPI(this.form.value).subscribe({
+        next: (res) => {
+          console.log("修改成功");
+        },
+        error: (err) => {
+          console.log("修改失败");
+        },
+        complete: () => {
+          this.resetForm()
+          this.closeDialog()
+          this.studentService.getStudentListAPI().subscribe()
+        }
+      });
+    }
   }
 }

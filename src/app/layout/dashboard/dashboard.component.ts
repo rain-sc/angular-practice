@@ -13,8 +13,8 @@ export interface DialogTitleType {
   delete:string
 }
 export interface DialogType {
-  actionType: keyof DialogTitleType
-  studentInfo: StudentType
+  actionType:''| keyof DialogTitleType
+  studentInfo:  StudentType
 }
 
 @Component({
@@ -29,7 +29,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   constructor(private studentService: StudentApiService,private dialog:MatDialog) { }
   studentList!: StudentType
-  loadingIndicator = true;
   dialogTitle: DialogTitleType = {
     add: 'Add',
     edit: 'Edit',
@@ -58,7 +57,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.dialog.open(DialogComponent,{
       data:{
         actionType:`${this.dialogTitle[actionType]} Student [${rowData.name}]`,
-        studentInfo:rowData
+        studentInfo:rowData,
       },
       width:'450px',
     })

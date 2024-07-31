@@ -14,4 +14,8 @@ export class StudentApiService {
   getStudentListAPI():Observable<ResType<StudentType>>{
     return this.http.get<ResType<StudentType>>('/api/students')
   }
+
+  updateStudentAPI(data:StudentType):Observable<ResType<StudentType>>{
+    return this.http.put<ResType<StudentType>>(`/api/students/${data.id}`,data)
+  }
 }

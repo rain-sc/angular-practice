@@ -1,6 +1,6 @@
 <div>
   <h2 mat-dialog-title>{{data.actionType}}</h2>
-  <mat-dialog-content style="display:flex;flex-direction: column;" [formGroup]="form">
+  <mat-dialog-content style="display:flex;flex-direction: column;" [formGroup]="form"  >
     <mat-form-field>
       <input matInput placeholder="Name" formControlName="name">
     </mat-form-field>
@@ -18,13 +18,13 @@
       <input matInput placeholder="city" formControlName="city">
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="hopeSalary" formControlName="hopeSalary">
+      <input matInput placeholder="hopeSalary" formControlName="hope_salary" type="number">
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="salary" formControlName="salary">
+      <input matInput placeholder="salary" formControlName="salary" type="number">
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="group" formControlName="group">
+      <input matInput placeholder="group" formControlName="group" type="number">
     </mat-form-field>
   </mat-dialog-content>
   <mat-dialog-actions align="end">
