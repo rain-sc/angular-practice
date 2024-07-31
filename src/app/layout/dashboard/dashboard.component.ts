@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, OnInit, } from '@angular/core';
+import { StudentApiService } from 'src/app/services/student-api.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,13 +11,17 @@ import { AfterViewInit, Component, OnInit, } from '@angular/core';
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
 
-  constructor( ) { }
+  constructor(private studentService:StudentApiService ) { }
    
   ngOnInit() {
-
+this.getStudentList()
   }
   ngAfterViewInit() {
 
   }
-
+  getStudentList(){
+    this.studentService.getStudentListAPI().subscribe((res)=>
+      console.log('res',res)
+  )
+}
 }

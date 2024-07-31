@@ -9,12 +9,11 @@ export class AuthHttpInterceptorService {
   constructor() { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const token = localStorage.getItem('ngToken');
+    const token = localStorage.getItem('ngToken')!;
     const newReq = req.clone({
-      headers: req.headers.set('Authorization', 'Bearer ' + token),
+      headers: req.headers.set('Authorization', token),
     });
     const started = Date.now();
-
     return next.handle(newReq).pipe(
       tap((event: HttpEvent<any>) => {
         if(event instanceof HttpResponse) {
