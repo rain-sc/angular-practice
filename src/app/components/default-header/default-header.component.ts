@@ -10,16 +10,16 @@ import { addUserInfo, deleteUserInfo } from 'src/app/store/actions/user.actions'
   styleUrls: ['./default-header.component.scss']
 })
 export class DefaultHeaderComponent implements OnInit {
-  constructor(private router:Router,private store:Store<AppState>){
-    
+  constructor(private router: Router, private store: Store<AppState>) {
+
   }
-  username:string = ''
- 
-  ngOnInit(){
+  username: string = ''
+
+  ngOnInit() {
     this.username = localStorage.getItem('ngUsername')!
   }
 
-  logout(){
+  logout() {
     localStorage.removeItem('ngToken')
     localStorage.removeItem('ngUsername')
     this.router.navigate(['/login'])

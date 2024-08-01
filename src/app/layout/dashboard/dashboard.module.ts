@@ -11,6 +11,6 @@ import { DialogComponent } from 'src/app/components/dialog/dialog.component';
     DashboardRoutingModule,
   ],
   declarations: [],
-  entryComponents:[DialogComponent]
+  entryComponents: [DialogComponent]
 })
 export class DashboardModule { }

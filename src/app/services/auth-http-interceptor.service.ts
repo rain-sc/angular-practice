@@ -16,11 +16,11 @@ export class AuthHttpInterceptorService {
     const started = Date.now();
     return next.handle(newReq).pipe(
       tap((event: HttpEvent<any>) => {
-        if(event instanceof HttpResponse) {
+        if (event instanceof HttpResponse) {
           const elapsed = Date.now() - started;
           console.log(`Request for ${newReq.urlWithParams} took ${elapsed} ms.`, event.status);
         }
       })
     )
-}
+  }
 }

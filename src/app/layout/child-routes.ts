@@ -1,5 +1,5 @@
 
-export const childRoutes  = [
+export const childRoutes = [
   {
     name: 'Dashboard',
     path: 'dashboard',

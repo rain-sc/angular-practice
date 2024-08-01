@@ -9,21 +9,21 @@ import { Observable } from 'rxjs';
 })
 export class StudentApiService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  getStudentListAPI():Observable<ResType<StudentType>>{
+  getStudentListAPI(): Observable<ResType<StudentType>> {
     return this.http.get<ResType<StudentType>>('/api/students')
   }
 
-  updateStudentAPI(data:StudentType):Observable<ResType<StudentType>>{
-    return this.http.put<ResType<StudentType>>(`/api/students/${data.id}`,data)
+  updateStudentAPI(data: StudentType): Observable<ResType<StudentType>> {
+    return this.http.put<ResType<StudentType>>(`/api/students/${data.id}`, data)
   }
 
-  deleteStudentAPI(data:StudentType){
-  return this.http.delete(`/api/students/${data.id}`)
+  deleteStudentAPI(data: StudentType) {
+    return this.http.delete(`/api/students/${data.id}`)
   }
-  
-  createStudentAPI(data:StudentType):Observable<ResType<StudentType>>{
-    return this.http.post<ResType<StudentType>>('/api/students',data)
+
+  createStudentAPI(data: StudentType): Observable<ResType<StudentType>> {
+    return this.http.post<ResType<StudentType>>('/api/students', data)
   }
 }

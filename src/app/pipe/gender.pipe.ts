@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'transformGender',  
+  name: 'transformGender',
   standalone: true
 })
 export class GenderPipe implements PipeTransform {

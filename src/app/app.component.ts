@@ -8,11 +8,11 @@ import { iconSubset } from './icons/icon-subset';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-constructor(
-  private iconSetService: IconSetService
+  constructor(
+    private iconSetService: IconSetService
 
-){
-  this.iconSetService.icons = { ...iconSubset };
+  ) {
+    this.iconSetService.icons = { ...iconSubset };
 
-}
+  }
 }

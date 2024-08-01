@@ -31,7 +31,7 @@ export class DialogComponent implements OnInit {
   ])
   genderList: number[] = [0, 1]
   form = this.formBuilder.group({
-     id:[0],
+    id: [0],
     name: ['', [Validators.required]],
     gender: [this.genderControl.value, Validators.required],
     age: [0, Validators.required],
@@ -42,12 +42,12 @@ export class DialogComponent implements OnInit {
     salary: [0, Validators.required],
     group: [1, Validators.required]
   })
-  submitted=false
+  submitted = false
   ngOnInit() {
     if (this.data.actionType === 'edit') {
       this.form.patchValue({
         ...this.data.studentInfo,
-       id:this.data.studentInfo.id
+        id: this.data.studentInfo.id
       }
       )
     }
@@ -56,7 +56,7 @@ export class DialogComponent implements OnInit {
     this.dialogRef.close();
   }
   onFormValidate() {
-    this.submitted =true
+    this.submitted = true
     return this.form.status === 'VALID';
   }
   resetForm() {
@@ -113,13 +113,13 @@ export class DialogComponent implements OnInit {
       }
     })
   }
-  createStudent(){
-    if(this.onFormValidate()){
+  createStudent() {
+    if (this.onFormValidate()) {
       this.studentService.createStudentAPI(this.form.value as any).subscribe({
-        next:(res)=>{
+        next: (res) => {
           this.toastr.success('Create student successfully!')
         },
-        error:(err)=>{
+        error: (err) => {
           this.toastr.error('Create student failed!')
           console.error(err)
         },
@@ -133,9 +133,9 @@ export class DialogComponent implements OnInit {
   onSubmit() {
     if (this.data.actionType === 'edit') {
       this.editStudent()
-    } else if(this.data.actionType === 'delete') {
+    } else if (this.data.actionType === 'delete') {
       this.deleteStudent()
-    } else if(this.data.actionType === 'create'){
+    } else if (this.data.actionType === 'create') {
       this.createStudent()
     }
   }

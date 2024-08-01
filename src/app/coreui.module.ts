@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { 
+import {
   AlertModule,
   ButtonDirective,
   ButtonGroupComponent,
@@ -22,12 +22,12 @@ import {
   InputGroupComponent,
   SidebarComponent,
   SidebarHeaderComponent,
-  SidebarModule, 
+  SidebarModule,
   HeaderNavComponent,
   NavItemComponent,
   BreadcrumbRouterComponent,
- 
- } from '@coreui/angular';
+
+} from '@coreui/angular';
 
 const modules = [
   AlertModule,
@@ -51,16 +51,16 @@ const modules = [
   InputGroupComponent,
   SidebarComponent,
   SidebarHeaderComponent,
-  SidebarModule ,
+  SidebarModule,
   HeaderNavComponent,
   NavItemComponent,
   BreadcrumbRouterComponent,
-   
+
 ]
 
 @NgModule({
   imports: modules,
-  exports:modules
+  exports: modules
 })
 
-export class CoreuiModule{}
+export class CoreuiModule { }

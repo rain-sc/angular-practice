@@ -26,9 +26,9 @@ import { ToastrModule } from 'ngx-toastr';
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreDevtoolsModule.instrument(),
     ToastrModule.forRoot({
-      timeOut:2000,
-      progressBar:true,
-      progressAnimation:'increasing',
+      timeOut: 2000,
+      progressBar: true,
+      progressAnimation: 'increasing',
     }),
   ],
   providers: [
@@ -37,9 +37,9 @@ import { ToastrModule } from 'ngx-toastr';
       useClass: AuthHttpInterceptorService,
       multi: true,
     },
-    
+
   ],
-  schemas:[CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,21 +1,15 @@
-<ng-container >
+<ng-container>
   <c-container [fluid]="true" class="border-bottom px-4">
-    <button
-      cSidebarToggle="sidebar1"
-      cHeaderToggler
-      class="btn"
-      toggle="visible"
-      style="margin-inline-start: -14px;"
-      aria-label="Toggle sidebar navigation"
-    >
+    <button cSidebarToggle="sidebar1" cHeaderToggler class="btn" toggle="visible" style="margin-inline-start: -14px;"
+      aria-label="Toggle sidebar navigation">
       <svg cIcon name="cilMenu" size="lg"></svg>
-    </button>  
+    </button>
     <c-header-nav class="ms-auto ms-md-0">
       <c-nav-item style="margin-right: 6px;">
-        {{username }}  
+        {{username }}
       </c-nav-item>
-      <c-nav-item  (click)="logout()" style="cursor: pointer;">
-        <svg cIcon class="me-2" name="cilAccountLogout" ></svg>
+      <c-nav-item (click)="logout()" style="cursor: pointer;">
+        <svg cIcon class="me-2" name="cilAccountLogout"></svg>
       </c-nav-item>
     </c-header-nav>
 
