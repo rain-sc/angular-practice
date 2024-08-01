@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit, OnDestroy {
    createForm(){
     this.loginForm = this.formBuilder.group({
        username: new FormControl(
-        'admin999',
+        'rainwong',
          [
           Validators.required,
           Validators.minLength(this.validationFormsService.formRules.usernameMin),

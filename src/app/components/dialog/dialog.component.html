@@ -3,9 +3,11 @@
  <div *ngIf="(data.actionType === 'edit' || data.actionType === 'create');else delete">
   <mat-dialog-content style="display:flex;flex-direction: column;" [formGroup]="form">
     <mat-form-field>
+      <mat-label>Name</mat-label>
       <input matInput placeholder="Name" formControlName="name">
     </mat-form-field>
    <mat-form-field >
+    <mat-label>Gender</mat-label>
       <mat-select [formControl]="genderControl" name="gender" placeholder="Gender">
         <mat-option *ngFor="let gender of genderList" [value]="gender">
           {{gender | transformGender}}
@@ -13,25 +15,32 @@
       </mat-select>
     </mat-form-field>
    <mat-form-field>
-      <input matInput placeholder="age" formControlName="age" type="number">
+    <mat-label>Age</mat-label>
+      <input matInput placeholder="Age" formControlName="age" type="number">
     </mat-form-field>
    <mat-form-field>
-      <input matInput placeholder="area" formControlName="area">
+    <mat-label>Area</mat-label>
+      <input matInput placeholder="Area" formControlName="area">
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="city" formControlName="city">
-    </mat-form-field>
-    <mat-form-field>
+    <mat-label>Province</mat-label>
       <input matInput placeholder="province" formControlName="province">
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="hopeSalary" formControlName="hope_salary" type="number">
+    <mat-label>City</mat-label>
+      <input matInput placeholder="City" formControlName="city">
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="salary" formControlName="salary" type="number">
+    <mat-label>Hope Salary</mat-label>
+      <input matInput placeholder="Hope Salary" formControlName="hope_salary" type="number">
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="group" formControlName="group" type="number">
+    <mat-label>Salary</mat-label>
+      <input matInput placeholder="Salary" formControlName="salary" type="number">
+    </mat-form-field>
+    <mat-form-field>
+    <mat-label>Group</mat-label>
+      <input matInput placeholder="Group" formControlName="group" type="number">
     </mat-form-field>  
   </mat-dialog-content>
 </div>
@@ -42,6 +51,6 @@
 </ng-template>
   <mat-dialog-actions align="end">
     <button mat-button [mat-dialog-close]="false">Cancel</button>
-    <button mat-button [color]="data.actionType === 'delete'?'warn':'primary'" (click)="onSubmit()">{{data.actionType === 'delete'?'Delete':'Submit'}}</button>
+    <button mat-button [disabled]="submitted" [color]="data.actionType === 'delete'?'warn':'primary'" (click)="onSubmit()">{{data.actionType === 'delete'?'Delete':'Submit'}}</button>
   </mat-dialog-actions>
 </div>

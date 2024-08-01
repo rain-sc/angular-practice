@@ -41,8 +41,8 @@ export class DialogComponent implements OnInit {
     hope_salary: [0, Validators.required],
     salary: [0, Validators.required],
     group: [1, Validators.required]
-
   })
+  submitted=false
   ngOnInit() {
     if (this.data.actionType === 'edit') {
       this.form.patchValue({
@@ -56,6 +56,7 @@ export class DialogComponent implements OnInit {
     this.dialogRef.close();
   }
   onFormValidate() {
+    this.submitted =true
     return this.form.status === 'VALID';
   }
   resetForm() {
@@ -77,6 +78,7 @@ export class DialogComponent implements OnInit {
     }
     this.form.reset()
     this.form.clearValidators()
+    this.submitted = false
   }
   editStudent() {
     if (this.onFormValidate()) {
