@@ -6,6 +6,9 @@ import { IconModule } from '@coreui/icons-angular';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from 'src/app/components/dialog/dialog.component';
 import { GenderPipe } from 'src/app/pipe/gender.pipe';
+import { FormBuilder,FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { MaterialModule } from 'src/app/material.module';
 
 export type DialogActionType = 'create' | 'edit' | 'delete' | ''
 export interface DialogType {
@@ -18,15 +21,16 @@ export interface DialogType {
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
   providers: [],
-  imports: [NgxDatatableModule, IconModule, GenderPipe ],
+  imports: [NgxDatatableModule, IconModule, GenderPipe, FormsModule, ReactiveFormsModule, CommonModule, MaterialModule],
   standalone: true
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private studentService: StudentApiService, private dialog: MatDialog) { }
+  constructor(private studentService: StudentApiService, private dialog: MatDialog, private fb: FormBuilder) { }
   studentList!: StudentType
   dialogTitle: DialogActionType = ''
   loadingIndicator: boolean = false
+
   ngOnInit() {
     this.getStudentList()
   }
@@ -45,15 +49,15 @@ export class DashboardComponent implements OnInit {
     }
     )
   }
-  openDialog(actionType: DialogActionType, rowData: StudentType) {
+  openDialog(actionType: DialogActionType, rowData?: StudentType) {
     this.dialog.open(DialogComponent, {
       data: {
-        actionType: `${this.dialogTitle=actionType}`,
+        actionType: `${this.dialogTitle = actionType}`,
         studentInfo: rowData,
       },
       width: '450px',
     }).afterClosed().subscribe(res => {
-        this.getStudentList()
+      this.getStudentList()
     })
   }
   editDialog(rowData: StudentType, actionType: DialogActionType) {
@@ -62,5 +66,10 @@ export class DashboardComponent implements OnInit {
   }
   deteleDialog(rowData: StudentType, actionType: DialogActionType) {
     this.openDialog(actionType, rowData)
+  }
+  createDialog(actionType: DialogActionType) {
+    this.openDialog(actionType)
+    console.log("actionType", actionType);
+
   }
 }

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DialogType } from 'src/app/layout/dashboard/dashboard.component';
 import { MaterialModule } from 'src/app/material.module';
@@ -22,43 +22,35 @@ export class DialogComponent implements OnInit {
     public dialogRef: MatDialogRef<DialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogType,
     private studentService: StudentApiService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private formBuilder: FormBuilder
   ) {
   }
-  genderControl = new FormControl(this.data.studentInfo.gender, [
+  genderControl = new FormControl(0, [
     Validators.required
   ])
   genderList: number[] = [0, 1]
-  form: FormGroup = new FormGroup<any>({
-    id: new FormControl(this.data.studentInfo.id),
-    name: new FormControl(this.data.studentInfo.name, [
-      Validators.required
-    ]),
-    gender: this.genderControl,
-    age: new FormControl(this.data.studentInfo.age, [
-      Validators.required
-    ]),
-    area: new FormControl(this.data.studentInfo.area, [
-      Validators.required
-    ]),
-    city: new FormControl(this.data.studentInfo.city, [
-      Validators.required
-    ]),
-    province: new FormControl(this.data.studentInfo.province, [
-      Validators.required
-    ]),
-    hope_salary: new FormControl(this.data.studentInfo.hope_salary, [
-      Validators.required
-    ]),
-    salary: new FormControl(this.data.studentInfo.salary, [
-      Validators.required
-    ]),
-    group: new FormControl(this.data.studentInfo.group, [
-      Validators.required
-    ]),
+  form = this.formBuilder.group({
+    id:[0],
+    name: ['', [Validators.required]],
+    gender: [this.genderControl, Validators.required],
+    age: [0, Validators.required],
+    area: ['', Validators.required],
+    city: ['', Validators.required],
+    province: ['', Validators.required],
+    hope_salary: [0, Validators.required],
+    salary: [0, Validators.required],
+    group: [1, Validators.required]
+
   })
   ngOnInit() {
-
+    if (this.data.actionType === 'edit') {
+      this.form.patchValue({
+        ...this.data.studentInfo,
+        id:this.data.studentInfo.id
+      }
+      )
+    }
   }
   closeDialog() {
     this.dialogRef.close();
@@ -83,12 +75,12 @@ export class DialogComponent implements OnInit {
       updatedAt: '',
       user_id: 0,
     }
-    this.form.reset('')
+    this.form.reset()
     this.form.clearValidators()
   }
   editStudent() {
     if (this.onLoginValidate()) {
-      this.studentService.updateStudentAPI(this.form.value).subscribe({
+      this.studentService.updateStudentAPI(this.form.value as any).subscribe({
         next: (res) => {
           this.toastr.success('Update student detail successfully!');
         },

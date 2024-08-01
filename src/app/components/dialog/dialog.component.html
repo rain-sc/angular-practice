@@ -1,18 +1,18 @@
 <div>
-  <h2 mat-dialog-title>{{data.actionType | transformCapitalizes}} stundet [{{data.studentInfo.name}}]</h2>
-  <div *ngIf="data.actionType === 'edit';else delete">
+  <h2 mat-dialog-title>{{data.actionType | transformCapitalizes}} stundet {{data.actionType !== 'create' ? '['+data.studentInfo.name+']' :''}}</h2>
+ <div *ngIf="(data.actionType === 'edit' || data.actionType === 'create');else delete">
   <mat-dialog-content style="display:flex;flex-direction: column;" [formGroup]="form">
     <mat-form-field>
       <input matInput placeholder="Name" formControlName="name">
     </mat-form-field>
-    <mat-form-field >
+   <mat-form-field >
       <mat-select [formControl]="genderControl" name="gender" placeholder="Gender">
         <mat-option *ngFor="let gender of genderList" [value]="gender">
           {{gender | transformGender}}
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field>
+   <mat-form-field>
       <input matInput placeholder="area" formControlName="area">
     </mat-form-field>
     <mat-form-field>
@@ -26,16 +26,11 @@
     </mat-form-field>
     <mat-form-field>
       <input matInput placeholder="group" formControlName="group" type="number">
-    </mat-form-field>
+    </mat-form-field>  
   </mat-dialog-content>
 </div>
 <ng-template #delete>
-  <div *ngIf="data.actionType === 'delete';else create">
-    <mat-dialog-content>Are you sure to delete current student [{{ data.studentInfo.name }}]?</mat-dialog-content>
-  </div>
-</ng-template>
-<ng-template #create>
-  <div *ngIf="data.actionType === 'create'">
+  <div *ngIf="data.actionType === 'delete';">
     <mat-dialog-content>Are you sure to delete current student [{{ data.studentInfo.name }}]?</mat-dialog-content>
   </div>
 </ng-template>
