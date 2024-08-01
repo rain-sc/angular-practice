@@ -54,14 +54,12 @@ export class DialogComponent implements OnInit {
       Validators.required
     ]),
   })
-  submitted = false
   ngOnInit() {
   }
   closeDialog() {
     this.dialogRef.close();
   }
   onLoginValidate() {
-    this.submitted = true;
     return this.form.status === 'VALID';
   }
   resetForm() {
@@ -83,7 +81,6 @@ export class DialogComponent implements OnInit {
     }
     this.form.reset('')
     this.form.clearValidators()
-    console.log("this.data.actionType", this.data);
   }
   onSubmit() {
     if (this.onLoginValidate()) {
@@ -97,7 +94,6 @@ export class DialogComponent implements OnInit {
         complete: () => {
           this.resetForm()
           this.closeDialog()
-          this.studentService.getStudentListAPI().subscribe()
         }
       });
     }

@@ -7,14 +7,15 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from 'src/app/components/dialog/dialog.component';
 import { GenderPipe } from 'src/app/pipe/gender.pipe';
 
+
 export interface DialogTitleType {
   add: string,
   edit: string,
-  delete:string
+  delete: string
 }
 export interface DialogType {
-  actionType:''| keyof DialogTitleType
-  studentInfo:  StudentType
+  actionType: '' | keyof DialogTitleType
+  studentInfo: StudentType
 }
 
 @Component({
@@ -22,53 +23,55 @@ export interface DialogType {
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
   providers: [],
-  imports: [NgxDatatableModule,IconModule,GenderPipe],
+  imports: [NgxDatatableModule, IconModule, GenderPipe],
   standalone: true
 })
-export class DashboardComponent implements OnInit, AfterViewInit {
+export class DashboardComponent implements OnInit {
 
-  constructor(private studentService: StudentApiService,private dialog:MatDialog) { }
+  constructor(private studentService: StudentApiService, private dialog: MatDialog) { }
   studentList!: StudentType
   dialogTitle: DialogTitleType = {
     add: 'Add',
     edit: 'Edit',
-    delete:'Delete'
+    delete: 'Delete'
   }
+  loadingIndicator: boolean = false
   ngOnInit() {
     this.getStudentList()
   }
-  ngAfterViewInit() {
-
-  }
   getStudentList() {
-    this.studentService.getStudentListAPI().subscribe(
-      (next) => {
-        this.studentList = next.data
+    this.loadingIndicator = true
+    this.studentService.getStudentListAPI().subscribe({
+      next: (res) => {
+        this.studentList = res.data
       },
-      (error) => {
+      error: (error) => {
         console.error(error);
       },
-      () => {
-        console.log('completed');
+      complete: () => {
+        this.loadingIndicator = false
       }
+    }
     )
   }
-  openDialog(actionType: keyof DialogTitleType,rowData:StudentType) {
-    this.dialog.open(DialogComponent,{
-      data:{
-        actionType:`${this.dialogTitle[actionType]} Student [${rowData.name}]`,
-        studentInfo:rowData,
+  openDialog(actionType: keyof DialogTitleType, rowData: StudentType) {
+    this.dialog.open(DialogComponent, {
+      data: {
+        actionType: `${this.dialogTitle[actionType]} Student [${rowData.name}]`,
+        studentInfo: rowData,
       },
-      width:'450px',
-    }).afterClosed().subscribe(res=>{
-      this.getStudentList()
+      width: '450px',
+    }).afterClosed().subscribe(res => {
+      if(res === undefined){
+        this.getStudentList()
+      }
     })
-    }
-  editDialog(rowData:StudentType,actionType: keyof DialogTitleType){
-    this.openDialog(actionType,rowData)
+  }
+  editDialog(rowData: StudentType, actionType: keyof DialogTitleType) {
+    this.openDialog(actionType, rowData)
 
   }
-  deteleDialog(row:StudentType,actionType: keyof DialogTitleType){
-    console.log("blockAgents",row.id);
+  deteleDialog(row: StudentType, actionType: keyof DialogTitleType) {
+    console.log("blockAgents", row.id);
   }
 }
