@@ -3,26 +3,25 @@ import { FormGroup, FormControl,  Validators, FormBuilder } from '@angular/forms
 import { LoginApiService } from '../services/login-api.service';
 import { Router } from '@angular/router';
 import { ValidationFormsService } from '../services/validation-forms.service';
-import { select, Store } from '@ngrx/store';
-import { AppState } from '../store';
-import { selectUserInfo } from '../store/selectors/user.selectors';
-import { Observable } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  // form!: FormGroup;
   loginForm!:FormGroup
-  submitted  =false
   formErrors:any
   formControls!: string[];
+  submitted  =false
   constructor(
     private LoginApiService: LoginApiService, 
     private router: Router,
     private formBuilder:FormBuilder,
     private validationFormsService:ValidationFormsService,
+    private toastr: ToastrService
+
   ) {
     this.formErrors = this.validationFormsService.errorMessages;
     this.createForm();
@@ -48,7 +47,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.formControls = Object.keys(this.loginForm.controls)
    }
    onLoginValidate() {
-    this.submitted = true;
+    this.submitted = true
     return this.loginForm.status === 'VALID';
   }
   ngOnInit() {
@@ -58,7 +57,15 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
   onSubmit(){
     if(this.onLoginValidate()){
-      this.LoginApiService.loginAPI(this.loginForm.value).subscribe()
+      this.LoginApiService.loginAPI(this.loginForm.value).subscribe({
+        next:(res)=>{
+          this.toastr.success('Login successfully!');
+
+        },
+        error:(error)=>{
+          this.toastr.success('Login failed!');
+        }
+      })
     }
   }
 }

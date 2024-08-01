@@ -6,6 +6,7 @@ import { DialogType } from 'src/app/layout/dashboard/dashboard.component';
 import { MaterialModule } from 'src/app/material.module';
 import { GenderPipe } from 'src/app/pipe/gender.pipe';
 import { StudentApiService } from 'src/app/services/student-api.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-dialog',
@@ -20,6 +21,7 @@ export class DialogComponent implements OnInit {
     public dialogRef: MatDialogRef<DialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogType,
     private studentService: StudentApiService,
+    private toastr: ToastrService
   ) {
   }
   genderControl = new FormControl(this.data.studentInfo.gender, [
@@ -55,6 +57,7 @@ export class DialogComponent implements OnInit {
     ]),
   })
   ngOnInit() {
+  
   }
   closeDialog() {
     this.dialogRef.close();
@@ -86,10 +89,10 @@ export class DialogComponent implements OnInit {
     if (this.onLoginValidate()) {
       this.studentService.updateStudentAPI(this.form.value).subscribe({
         next: (res) => {
-          console.log("修改成功");
+          this.toastr.success('Update student detail successfully!');
         },
         error: (err) => {
-          console.log("修改失败");
+          this.toastr.error('Update student detail failed!');
         },
         complete: () => {
           this.resetForm()

@@ -10,6 +10,8 @@ import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AuthHttpInterceptorService } from './services/auth-http-interceptor.service';
+import { ToastrModule } from 'ngx-toastr';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +24,12 @@ import { AuthHttpInterceptorService } from './services/auth-http-interceptor.ser
     ReactiveFormsModule,
     HttpClientModule,
     StoreModule.forRoot(reducers, { metaReducers }),
-    StoreDevtoolsModule.instrument()
+    StoreDevtoolsModule.instrument(),
+    ToastrModule.forRoot({
+      timeOut:2000,
+      progressBar:true,
+      progressAnimation:'increasing',
+    })
   ],
   providers: [
     {
