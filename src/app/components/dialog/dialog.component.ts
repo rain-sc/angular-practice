@@ -31,9 +31,9 @@ export class DialogComponent implements OnInit {
   ])
   genderList: number[] = [0, 1]
   form = this.formBuilder.group({
-    id:[0],
+     id:[0],
     name: ['', [Validators.required]],
-    gender: [this.genderControl, Validators.required],
+    gender: [this.genderControl.value, Validators.required],
     age: [0, Validators.required],
     area: ['', Validators.required],
     city: ['', Validators.required],
@@ -47,7 +47,7 @@ export class DialogComponent implements OnInit {
     if (this.data.actionType === 'edit') {
       this.form.patchValue({
         ...this.data.studentInfo,
-        id:this.data.studentInfo.id
+       id:this.data.studentInfo.id
       }
       )
     }
@@ -55,7 +55,7 @@ export class DialogComponent implements OnInit {
   closeDialog() {
     this.dialogRef.close();
   }
-  onLoginValidate() {
+  onFormValidate() {
     return this.form.status === 'VALID';
   }
   resetForm() {
@@ -79,7 +79,7 @@ export class DialogComponent implements OnInit {
     this.form.clearValidators()
   }
   editStudent() {
-    if (this.onLoginValidate()) {
+    if (this.onFormValidate()) {
       this.studentService.updateStudentAPI(this.form.value as any).subscribe({
         next: (res) => {
           this.toastr.success('Update student detail successfully!');
@@ -111,11 +111,30 @@ export class DialogComponent implements OnInit {
       }
     })
   }
+  createStudent(){
+    if(this.onFormValidate()){
+      this.studentService.createStudentAPI(this.form.value as any).subscribe({
+        next:(res)=>{
+          this.toastr.success('Create student successfully!')
+        },
+        error:(err)=>{
+          this.toastr.error('Create student failed!')
+          console.error(err)
+        },
+        complete: () => {
+          this.resetForm()
+          this.closeDialog()
+        }
+      })
+    }
+  }
   onSubmit() {
     if (this.data.actionType === 'edit') {
       this.editStudent()
     } else if(this.data.actionType === 'delete') {
       this.deleteStudent()
+    } else if(this.data.actionType === 'create'){
+      this.createStudent()
     }
   }
 }

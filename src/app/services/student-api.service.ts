@@ -22,4 +22,8 @@ export class StudentApiService {
   deleteStudentAPI(data:StudentType){
   return this.http.delete(`/api/students/${data.id}`)
   }
+  
+  createStudentAPI(data:StudentType):Observable<ResType<StudentType>>{
+    return this.http.post<ResType<StudentType>>('/api/students',data)
+  }
 }
