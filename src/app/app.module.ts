@@ -29,7 +29,7 @@ import { ToastrModule } from 'ngx-toastr';
       timeOut:2000,
       progressBar:true,
       progressAnimation:'increasing',
-    })
+    }),
   ],
   providers: [
     {

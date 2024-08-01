@@ -7,12 +7,13 @@ import { MaterialModule } from 'src/app/material.module';
 import { GenderPipe } from 'src/app/pipe/gender.pipe';
 import { StudentApiService } from 'src/app/services/student-api.service';
 import { ToastrService } from 'ngx-toastr';
+import { CapitalizePipe } from 'src/app/pipe/capitalize.pipe';
 
 @Component({
   selector: 'app-dialog',
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.scss'],
-  imports: [MaterialModule, FormsModule, ReactiveFormsModule, CommonModule, GenderPipe],
+  imports: [MaterialModule, FormsModule, ReactiveFormsModule, CommonModule, GenderPipe, CapitalizePipe],
   standalone: true,
   providers: []
 })
@@ -57,7 +58,7 @@ export class DialogComponent implements OnInit {
     ]),
   })
   ngOnInit() {
-  
+
   }
   closeDialog() {
     this.dialogRef.close();
@@ -85,7 +86,7 @@ export class DialogComponent implements OnInit {
     this.form.reset('')
     this.form.clearValidators()
   }
-  onSubmit() {
+  editStudent() {
     if (this.onLoginValidate()) {
       this.studentService.updateStudentAPI(this.form.value).subscribe({
         next: (res) => {
@@ -93,12 +94,36 @@ export class DialogComponent implements OnInit {
         },
         error: (err) => {
           this.toastr.error('Update student detail failed!');
+          console.error(err);
         },
         complete: () => {
           this.resetForm()
           this.closeDialog()
         }
       });
+    }
+  }
+  deleteStudent() {
+    if (Object.keys(this.data.studentInfo).length === 0) return
+    this.studentService.deleteStudentAPI(this.data.studentInfo).subscribe({
+      next: (res) => {
+        this.toastr.success('Delete student successfully!');
+      },
+      error: (err) => {
+        this.toastr.error('Delete student failed!');
+        console.error(err);
+      },
+      complete: () => {
+        this.resetForm()
+        this.closeDialog()
+      }
+    })
+  }
+  onSubmit() {
+    if (this.data.actionType === 'edit') {
+      this.editStudent()
+    } else if(this.data.actionType === 'delete') {
+      this.deleteStudent()
     }
   }
 }

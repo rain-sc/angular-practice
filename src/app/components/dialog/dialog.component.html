@@ -1,6 +1,7 @@
 <div>
-  <h2 mat-dialog-title>{{data.actionType}}</h2>
-  <mat-dialog-content style="display:flex;flex-direction: column;" [formGroup]="form"  >
+  <h2 mat-dialog-title>{{data.actionType | transformCapitalizes}} stundet [{{data.studentInfo.name}}]</h2>
+  <div *ngIf="data.actionType === 'edit';else delete">
+  <mat-dialog-content style="display:flex;flex-direction: column;" [formGroup]="form">
     <mat-form-field>
       <input matInput placeholder="Name" formControlName="name">
     </mat-form-field>
@@ -27,8 +28,19 @@
       <input matInput placeholder="group" formControlName="group" type="number">
     </mat-form-field>
   </mat-dialog-content>
+</div>
+<ng-template #delete>
+  <div *ngIf="data.actionType === 'delete';else create">
+    <mat-dialog-content>Are you sure to delete current student [{{ data.studentInfo.name }}]?</mat-dialog-content>
+  </div>
+</ng-template>
+<ng-template #create>
+  <div *ngIf="data.actionType === 'create'">
+    <mat-dialog-content>Are you sure to delete current student [{{ data.studentInfo.name }}]?</mat-dialog-content>
+  </div>
+</ng-template>
   <mat-dialog-actions align="end">
     <button mat-button [mat-dialog-close]="false">Cancel</button>
-    <button mat-button color="primary" (click)="onSubmit()">Save</button>
+    <button mat-button [color]="data.actionType === 'delete'?'warn':'primary'" (click)="onSubmit()">{{data.actionType === 'delete'?'Delete':'Submit'}}</button>
   </mat-dialog-actions>
 </div>

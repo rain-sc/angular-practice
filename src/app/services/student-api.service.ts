@@ -18,4 +18,8 @@ export class StudentApiService {
   updateStudentAPI(data:StudentType):Observable<ResType<StudentType>>{
     return this.http.put<ResType<StudentType>>(`/api/students/${data.id}`,data)
   }
+
+  deleteStudentAPI(data:StudentType){
+  return this.http.delete(`/api/students/${data.id}`)
+  }
 }

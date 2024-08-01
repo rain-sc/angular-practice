@@ -7,14 +7,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from 'src/app/components/dialog/dialog.component';
 import { GenderPipe } from 'src/app/pipe/gender.pipe';
 
-
-export interface DialogTitleType {
-  add: string,
-  edit: string,
-  delete: string
-}
+export type DialogActionType = 'create' | 'edit' | 'delete' | ''
 export interface DialogType {
-  actionType: '' | keyof DialogTitleType
+  actionType: DialogActionType
   studentInfo: StudentType
 }
 
@@ -23,18 +18,14 @@ export interface DialogType {
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
   providers: [],
-  imports: [NgxDatatableModule, IconModule, GenderPipe],
+  imports: [NgxDatatableModule, IconModule, GenderPipe ],
   standalone: true
 })
 export class DashboardComponent implements OnInit {
 
   constructor(private studentService: StudentApiService, private dialog: MatDialog) { }
   studentList!: StudentType
-  dialogTitle: DialogTitleType = {
-    add: 'Add',
-    edit: 'Edit',
-    delete: 'Delete'
-  }
+  dialogTitle: DialogActionType = ''
   loadingIndicator: boolean = false
   ngOnInit() {
     this.getStudentList()
@@ -54,24 +45,22 @@ export class DashboardComponent implements OnInit {
     }
     )
   }
-  openDialog(actionType: keyof DialogTitleType, rowData: StudentType) {
+  openDialog(actionType: DialogActionType, rowData: StudentType) {
     this.dialog.open(DialogComponent, {
       data: {
-        actionType: `${this.dialogTitle[actionType]} Student [${rowData.name}]`,
+        actionType: `${this.dialogTitle=actionType}`,
         studentInfo: rowData,
       },
       width: '450px',
     }).afterClosed().subscribe(res => {
-      if(res === undefined){
         this.getStudentList()
-      }
     })
   }
-  editDialog(rowData: StudentType, actionType: keyof DialogTitleType) {
+  editDialog(rowData: StudentType, actionType: DialogActionType) {
     this.openDialog(actionType, rowData)
 
   }
-  deteleDialog(row: StudentType, actionType: keyof DialogTitleType) {
-    console.log("blockAgents", row.id);
+  deteleDialog(rowData: StudentType, actionType: DialogActionType) {
+    this.openDialog(actionType, rowData)
   }
 }
